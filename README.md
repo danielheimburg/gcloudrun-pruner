@@ -6,7 +6,7 @@ Delete revisions / containers older than 2 days - https://en.wikipedia.org/wiki/
 ```
 DELETE_OLDER=P2D
 ```
-Always keep this amount of revisions / containers
+Always keep this amount of revisions / containers per service
 ```
 KEEP=3
 ```
