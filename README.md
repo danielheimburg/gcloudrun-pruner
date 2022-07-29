@@ -15,3 +15,5 @@ Region (for cloud run jobs) and projectname
 REGION=
 PROJECT=
 ```
+
+Contributions welcome!
