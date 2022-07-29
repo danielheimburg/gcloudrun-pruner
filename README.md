@@ -9,7 +9,6 @@ DELETE_OLDER=P2D
 Always keep this amount of revisions / containers
 ```
 KEEP=3
-```
 REGION=
 PROJECT=
 ```
