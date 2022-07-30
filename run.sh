@@ -14,7 +14,7 @@ then
   export $(cat .env | xargs)
 fi
 
-echo "running job"
+echo "running job.."
 
 services=$(gcloud --project=${PROJECT} run services list --format="value(metadata.name)")
 
