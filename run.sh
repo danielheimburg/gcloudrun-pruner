@@ -19,17 +19,17 @@ TMPDIR="/tmp"
 
 echo "running job.."
 
-services=$(gcloud ${GCLOUDARGS} run services list --format="value(metadata.name)")
+services=$(gcloud ${GCLOUDARGS} run services list  --region=${REGION} --format="value(metadata.name)")
 
 for service in $services; do
 
-    gcloud ${GCLOUDARGS} run revisions list --service=${service} --region=europe-west9 --filter="metadata.creationTimestamp<-${DELETE_OLDER}" --sort-by=metadata.creationTimestamp --format="value(metadata.name, status.imageDigest)" > ${TMPDIR}/${service}-rev.txt
+    gcloud ${GCLOUDARGS} run revisions list --service=${service} --region=${REGION} --filter="metadata.creationTimestamp<-${DELETE_OLDER}" --sort-by=metadata.creationTimestamp --format="value(metadata.name, status.imageDigest)" > ${TMPDIR}/${service}-rev.txt
 
     if [ $(cat ${TMPDIR}/${service}-rev.txt|wc -l) -ge ${KEEP} ]; then
         echo "cleaning ${service}"
         while read -r line; do
           read -r revision digest <<< $line
-          gcloud ${GCLOUDARGS} run revisions delete ${revision}
+          gcloud ${GCLOUDARGS} run revisions delete ${revision} --region=${REGION}
           gcloud ${GCLOUDARGS} container images delete --force-delete-tags ${digest};
         done < ${service}-rev.txt
     else
