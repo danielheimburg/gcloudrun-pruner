@@ -2,12 +2,7 @@
 
 set -euo pipefail
 
-_echoerr() {
-  1>&2 echo $@
-}
-
 _term() {
-  _echoerr "bye"
   exit 0
 }
 
